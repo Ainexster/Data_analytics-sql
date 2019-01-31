@@ -1,1 +1,61 @@
 Ссылка на ДЗ https://github.com/Dju999/data_analytics/blob/master/slides/hw1.md
+
+create table Films (
+-- column_name TYPE column_constraint,
+title varchar (100),
+ID serial primary key,
+Country varchar (100),
+box_office int,
+release_date timestamp
+);
+
+insert into Films values
+('The Lord of the Rings: The Fellowship of the Ring', 100001, 'USA', 871530324, '2001-12-10'::timestamp),
+('Sweet Home Alabama', 100002, 'USA', 180622424, '20020-09-20'::timestamp),
+('Каникулы строгого режима', 100003, 'RU', 17566040, '2009-08-13'::timestamp),
+('Время первых', 100004, 'RU', 9901675, '2017-04-06'::timestamp),
+('Inception', 100005, 'USA', 825532764, '2010-07-08'::timestamp)
+;
+
+create table Persons (
+ID serial primary key,
+FIO varchar (100)
+);
+
+insert into Persons values
+(200001, 'Peter Jackson'),
+(200002, 'Viggo Mortensen'),
+(200003, 'Andy Tennant'),
+(200004, 'Reese Witherspoon'),
+(200005, 'Игорь Зайцев'),
+(200006, 'Сергей Безруков'),
+(200007, 'Дмитрий Киселёв'),
+(200008, 'Евгений Миронов'),
+(200009, 'Константин Хабенский'),
+(200010, 'Christopher Nolan'),
+(200011, 'Leonardo DiCaprio'),
+(200012, 'Joseph Gordon-Levitt'),
+(200013, 'Tom Hardy')
+;
+
+create table Persons2content (
+person_id serial references Persons (ID),
+film_id serial references Films (ID),
+person_type varchar(100)
+);
+
+insert into Persons2content values
+(200001, 100001, 'producer'),
+(200002, 100001, 'actor'),
+(200003, 100002, 'producer'),
+(200004, 100002, 'actress'),
+(200005, 100003, 'producer'),
+(200006, 100003, 'actor'),
+(200007, 100004, 'producer'),
+(200008, 100004, 'actor'),
+(200009, 100004, 'actor'),
+(200010, 100005, 'producer'),
+(200011, 100005, 'actor'),
+(200012, 100005, 'actor'),
+(200013, 100005, 'actor')
+;
