@@ -1,0 +1,71 @@
+Select 'ФИО: Федотенкова Полина Сергеевна';
+-- 1.1
+select * from public.ratings limit 10;
+
+-- 1.2
+select * from public.links
+where
+	imdbid like '%42'and movieid <1000 and movieid>100
+limit 10;
+
+-- 2.1
+select *
+from public.links
+join public.ratings
+	on links.movieid=ratings.movieid
+	where ratings.rating=5
+limit 10;
+
+-- 3.1
+Select
+count (links.movieid) as count,
+count (distinct links.movieid) as count_distinct
+from public.links
+left join public.ratings
+	on links.movieid=ratings.movieid
+where ratings.rating is NULL
+;
+
+-- 3.2
+Select distinct
+userid,
+avg (rating) as average_rating,
+count (rating) as activity
+from public.ratings
+group by userid
+having avg (rating) > 3.5
+order by activity desc
+limit 10;
+
+-- 4.1
+Select distinct
+imdbid
+from public.links
+join public.ratings
+	on links.movieid=ratings.movieid
+where rating in (
+				select
+				avg (rating)
+				from public.ratings
+				group by movieid
+				having avg (rating) > 3.5
+)
+limit 10
+;
+
+-- 4.2
+with spec_table
+as (
+	select
+	userid,
+	count (rating) as activity,
+	avg (rating) as average_rating
+	from public.ratings
+	group by userid
+	having count (rating) > 10
+)
+select avg (average_rating)
+from spec_table
+;
+
+
