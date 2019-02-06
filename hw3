@@ -11,7 +11,7 @@ limit 30;
 
 Результат:
 
-```
+<pre>
 
 userid | movieid |   normed_rating   |    avg_rating
 --------+---------+-------------------+------------------
@@ -47,7 +47,8 @@ userid | movieid |   normed_rating   |    avg_rating
       2 |     141 |               0.5 | 3.31818181818182
 (30 rows)
 
-```
+</pre>
+
 
 
 
